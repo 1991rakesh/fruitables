@@ -3,61 +3,60 @@
     <div class="container" style="margin-top: 150px">
         <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-
-            <div class="form-group">
-                <label for="product_name">Product Name</label>
-                <input type="text" name="product_name" class="form-control" id="product_name" placeholder=""
-                    aria-describedby="nameHint">
-                <br>
-            </div>
-            <div class="form-group">
-                <label for="category">Category</label>
-                <input type="text" name="category" class="form-control" id="category" placeholder=""
-                    aria-describedby="nameHint">
-                <br>
-            </div>
-            <div class="form-group">
-                <label for="mrp">MRP</label>
-                <input type="text" name="mrp" class="form-control" id="mrp" placeholder=""
-                    aria-describedby="nameHint">
-                <br>
-            </div>
-            <div class="form-group">
-                <label for="selling_price">Selling Price</label>
-                <input type="text" name="selling_price" class="form-control" id="selling_price" placeholder=""
-                    aria-describedby="nameHint">
-                <br>
-            </div>
-            <div class="form-group">
-                <label for="short_description">Short Description</label>
-                <input type="text" name="short_description" class="form-control" id="short_description" placeholder=""
-                    aria-describedby="nameHint">
-                <br>
-            </div>
-            <div class="form-group">
-                <label for="long_description">Long Description</label>
-                <input type="text" name="long_description" class="form-control" id="long_description" placeholder=""
-                    aria-describedby="nameHint">
-                <br>
-            </div>
-            <div class="form-group">
-                <label for="product_images">Product Images</label>
-                <input type="file" name="product_images" class="form-control" id="product_images"
-                    placeholder="Choose Product Image" aria-describedby="nameHint" multiple>
-                <br>
-            </div>
-            <div class="form-group">
-                <label for="tags">Tags</label>
-                <input type="text" name="tags" class="form-control" id="tags" placeholder=""
-                    aria-describedby="nameHint">
-                <br>
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="product_name">Product Name</label>
+                    <input type="text" name="product_name" class="form-control" id="product_name" placeholder=""
+                        aria-describedby="nameHint">
+                    <br>
+                </div>
+                <div class="form-group col-6">
+                    <label for="category">Category</label>
+                    <input type="text" name="category" class="form-control" id="category" placeholder=""
+                        aria-describedby="nameHint">
+                    <br>
+                </div>
+                <div class="form-group col-6">
+                    <label for="mrp">MRP</label>
+                    <input type="text" name="mrp" class="form-control" id="mrp" placeholder=""
+                        aria-describedby="nameHint">
+                    <br>
+                </div>
+                <div class="form-group col-6">
+                    <label for="selling_price">Selling Price</label>
+                    <input type="text" name="selling_price" class="form-control" id="selling_price" placeholder=""
+                        aria-describedby="nameHint">
+                    <br>
+                </div>
+                <div class="form-group col-6">
+                    <label for="short_description">Short Description</label>
+                    <input type="text" name="short_description" class="form-control" id="short_description"
+                        placeholder="" aria-describedby="nameHint">
+                    <br>
+                </div>
+                <div class="form-group col-6">
+                    <label for="long_description">Long Description</label>
+                    <input type="text" name="long_description" class="form-control" id="long_description" placeholder=""
+                        aria-describedby="nameHint">
+                    <br>
+                </div>
+                <div class="form-group col-6">
+                    <label for="product_images">Product Images</label>
+                    <input type="file" name="product_images[]" class="form-control" id="product_images"
+                        placeholder="Choose Product Image" aria-describedby="nameHint" multiple>
+                    <br>
+                </div>
+                <div class="form-group col-6">
+                    <label for="tags">Tags</label>
+                    <input type="text" name="tags" class="form-control" id="tags" placeholder=""
+                        aria-describedby="nameHint">
+                    <br>
+                </div>
             </div>
             <button class="btn text-white" style="background-color:  #81c408"> Add Products</button>
         </form>
     </div>
 @endsection
-
-
 
 
 
@@ -126,11 +125,6 @@
         </div>
     </div>
 </x-app-layout> --}}
-
-
-
-
-
 
 {{-- <!doctype html>
 <html lang="en">

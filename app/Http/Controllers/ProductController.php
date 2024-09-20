@@ -15,7 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('products.add_product');
+        $product = Product::with('images')->get();
+        return view('index', ['products'=>$product]);
     }
 
     /**
@@ -23,7 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.add_product');
     }
 
     /**
@@ -31,22 +32,22 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // return response()->json(['message'=>'hello world']);
         $request->validate([
-            'product_name'=>'required|string|min:3|max:23'
+            'product_name'=>'required|string|min:3',
+            'mrp'=>'required|numeric',
         ]);
 
         $imgurl = [];
-        $images = [];
+
         foreach ($request->file('product_images') as $image) {
             $imgurl[] = $image->store('product_image', 'public');
-            $images[] = $image;
         }
 
-        $imgurl = Storage::disk('public')->put($request->product_images, 'ProductsImages');
         $produt = Product::create([
             'product_name'=>$request->product_name,
-            'mrp_price'=>$request->product_name,
-            'selling_price'=>$request->product_name,
+            'mrp_price'=>$request->mrp,
+            'selling_price'=>$request->selling_price,
             'short_description'=>$request->short_description,
             'long_description'=>$request->long_description,
             'vendor_id'=>Auth::user()->id,
@@ -57,11 +58,11 @@ class ProductController extends Controller
        for($i=0;$i<count($imgurl); $i++){
             Image::create([
                 'image_path'=>$imgurl[$i],
-                'product_id'=>$produt->id
+                'product_id'=>$produts->id
             ]);
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('success', "Product has been created!");
     }
 
     /**

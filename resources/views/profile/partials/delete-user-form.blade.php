@@ -1,4 +1,5 @@
 <section class="space-y-6">
+    <div class="container" style="margin-top: 150px">
     <header>
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Delete Account') }}
@@ -9,10 +10,14 @@
         </p>
     </header>
 
-    <x-danger-button
-        x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >{{ __('Delete Account') }}</x-danger-button>
+    <button class="btn text-white" style="background-color:  #81c408" x-data=""
+                    x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">
+                    Delete Account
+    </button>
+
+    {{-- <x-danger-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">
+        {{ __('Delete Account') }}
+    </x-danger-button> --}}
 
     <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
         <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
@@ -52,4 +57,5 @@
             </div>
         </form>
     </x-modal>
+    </div>
 </section>

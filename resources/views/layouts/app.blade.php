@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Fruitables - Vegetable Website Template</title>
+    <title>@yield('title')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -20,15 +20,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="{{asset('lib/lightbox/css/lightbox.min.css')}}" rel="stylesheet">
+    <link href="{{asset('lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
 
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{{asset('css/style.css')}}" rel="stylesheet">
 </head>
 
 <body>
@@ -105,7 +105,7 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item"
-                                            href="{{ route('product.store') }}">{{ __('Add Products') }}</a></li>
+                                            href="{{ route('product.create') }}">{{ __('Add Products') }}</a></li>
                                     <li>
                                     <li><a class="dropdown-item"
                                             href="{{ route('profile.edit') }}">{{ __('Profile') }}</a></li>
@@ -124,7 +124,7 @@
                             <!-- Guest User Sign In Button -->
                             <a href="{{ route('login') }}">
                                 <button type="button" class="btn btn-success" style="background-color:  #81c408">
-                                    Sing In
+                                    Sign In
                                 </button>
                             </a>
                         @endif
