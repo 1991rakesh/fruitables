@@ -1,62 +1,76 @@
 @extends('layouts.app')
+
+@section('title', 'Fruitables - Add Product')
 @section('content')
     <div class="container" style="margin-top: 150px">
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">{{ session('success') }}</div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show">
+                @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            </div>
+        @endif
         <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="form-group col-6">
                     <label for="product_name">Product Name</label>
                     <input type="text" name="product_name" class="form-control" id="product_name" placeholder=""
-                        aria-describedby="nameHint">
+                        value="{{ old('product_name') }}">
                     <br>
                 </div>
                 <div class="form-group col-6">
                     <label for="category">Category</label>
-                    <input type="text" name="category" class="form-control" id="category" placeholder=""
-                        aria-describedby="nameHint">
-                    <br>
+                    <select name="category" id="category" class="form-control">
+                        <option value="Fruits">Fruits</option>
+                        <option value="Meet">Meet</option>
+                        <option value="Vegitables">Vegitables</option>
+                    </select>
                 </div>
                 <div class="form-group col-6">
                     <label for="mrp">MRP</label>
-                    <input type="text" name="mrp" class="form-control" id="mrp" placeholder=""
-                        aria-describedby="nameHint">
+                    <input type="number" name="mrp" class="form-control" id="mrp" placeholder=""
+                        value="{{ old('mrp') }}">
                     <br>
                 </div>
                 <div class="form-group col-6">
                     <label for="selling_price">Selling Price</label>
-                    <input type="text" name="selling_price" class="form-control" id="selling_price" placeholder=""
-                        aria-describedby="nameHint">
+                    <input type="number" name="selling_price" class="form-control" id="selling_price" placeholder="">
                     <br>
                 </div>
                 <div class="form-group col-6">
                     <label for="short_description">Short Description</label>
                     <input type="text" name="short_description" class="form-control" id="short_description"
-                        placeholder="" aria-describedby="nameHint">
+                        placeholder="">
                     <br>
                 </div>
                 <div class="form-group col-6">
                     <label for="long_description">Long Description</label>
-                    <input type="text" name="long_description" class="form-control" id="long_description" placeholder=""
-                        aria-describedby="nameHint">
+                    <input type="text" name="long_description" class="form-control" id="long_description" placeholder="">
                     <br>
                 </div>
                 <div class="form-group col-6">
                     <label for="product_images">Product Images</label>
                     <input type="file" name="product_images[]" class="form-control" id="product_images"
-                        placeholder="Choose Product Image" aria-describedby="nameHint" multiple>
+                        placeholder="Choose Product Image" multiple>
                     <br>
                 </div>
                 <div class="form-group col-6">
                     <label for="tags">Tags</label>
-                    <input type="text" name="tags" class="form-control" id="tags" placeholder=""
-                        aria-describedby="nameHint">
+                    <input type="text" name="tags" class="form-control" id="tags" placeholder="">
                     <br>
                 </div>
             </div>
+
             <button class="btn text-white" style="background-color:  #81c408"> Add Products</button>
         </form>
     </div>
 @endsection
+
+
 
 
 

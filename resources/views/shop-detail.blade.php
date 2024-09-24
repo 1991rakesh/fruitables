@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title', 'Fruitables - Product Detials')
+
         @section('content')
         <!-- Single Page Header start -->
         <div class="container-fluid page-header py-5">
@@ -26,7 +28,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <h4 class="fw-bold mb-3">Brocoli</h4>
+                                <h4 class="fw-bold mb-3">{{$product->product_name}}</h4>
                                 <p class="mb-3">Category: Vegetables</p>
                                 <h5 class="fw-bold mb-3">3,35 $</h5>
                                 <div class="d-flex mb-4">
@@ -66,9 +68,9 @@
                                 </nav>
                                 <div class="tab-content mb-5">
                                     <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                                        <p>The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc. 
+                                        <p>The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.
                                             Susp endisse ultricies nisi vel quam suscipit </p>
-                                        <p>Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish filefish Antarctic 
+                                        <p>Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish filefish Antarctic
                                             icefish goldeye aholehole trumpetfish pilot fish airbreathing catfish, electric ray sweeper.</p>
                                         <div class="px-2">
                                             <div class="row g-4">
@@ -132,7 +134,7 @@
                                                         <i class="fa fa-star"></i>
                                                     </div>
                                                 </div>
-                                                <p>The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic 
+                                                <p>The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic
                                                     words etc. Susp endisse ultricies nisi vel quam suscipit </p>
                                             </div>
                                         </div>
@@ -150,7 +152,7 @@
                                                         <i class="fa fa-star"></i>
                                                     </div>
                                                 </div>
-                                                <p class="text-dark">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic 
+                                                <p class="text-dark">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic
                                                     words etc. Susp endisse ultricies nisi vel quam suscipit </p>
                                             </div>
                                         </div>
@@ -494,5 +496,5 @@
             </div>
         </div>
         <!-- Single Product End -->
-    
+
 @endsection

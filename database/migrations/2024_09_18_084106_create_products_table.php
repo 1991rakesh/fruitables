@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('product_name');
             $table->string('mrp_price');
             $table->string('selling_price');
-            $table->text('short_desc');
-            $table->text('long_desc');
+            $table->text('short_description');
+            $table->text('long_description');
             $table->text('category');
             $table->text('tags');
             $table->unsignedBigInteger('vendor_id');

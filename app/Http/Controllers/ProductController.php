@@ -13,9 +13,19 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+
+    //  public function shop()
+    //  {
+    //     $product = Product::with('images')->get();
+    //     // return $product;
+    //     return view('shop', ['products'=>$product]);
+    // }
+
     public function index()
     {
-        $product = Product::with('images')->get();
+        $limit = 4;
+        $product = Product::with('images')->limit($limit)->get();
         return view('index', ['products'=>$product]);
     }
 
@@ -36,6 +46,9 @@ class ProductController extends Controller
         $request->validate([
             'product_name'=>'required|string|min:3',
             'mrp'=>'required|numeric',
+            'selling_pricep'=>'required|numeric',
+            'short_description'=>'required|text',
+            'long_description'=>'required|text',
         ]);
 
         $imgurl = [];
@@ -58,11 +71,17 @@ class ProductController extends Controller
        for($i=0;$i<count($imgurl); $i++){
             Image::create([
                 'image_path'=>$imgurl[$i],
-                'product_id'=>$produts->id
+                'product_id'=>$produt->id
             ]);
         }
 
         return redirect()->back()->with('success', "Product has been created!");
+    }
+
+
+    public function shopdetails(Request $request){
+        $product = Product::with('images')->where('id', '=', $request->query('product_id'))->first();
+        return view('shop-detail', ['product'=>$product]);
     }
 
     /**
@@ -96,4 +115,4 @@ class ProductController extends Controller
     {
         //
     }
-}
+};

@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title', 'Fruitables - Cart')
+
         @section('content')
 
         <!-- Single Page Header start -->
@@ -64,7 +66,7 @@
                                         <i class="fa fa-times text-danger"></i>
                                     </button>
                                 </td>
-                            
+
                             </tr>
                             <tr>
                                 <th scope="row">

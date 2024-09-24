@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title', 'Fruitables - Chackout')
+
         @section('content')
 
         <!-- Single Page Header start -->

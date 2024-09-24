@@ -1,3 +1,11 @@
+<x-app-layout>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
@@ -57,3 +65,7 @@
         </div>
     </form>
 </x-guest-layout>
+<br>
+<br>
+<br>
+</x-app-layout>
