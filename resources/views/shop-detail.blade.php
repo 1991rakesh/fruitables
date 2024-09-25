@@ -27,8 +27,11 @@
                                     </a>
                                 </div>
                             </div>
+                            @if(isset($products))
                             <div class="col-lg-6">
                                 <h4 class="fw-bold mb-3">{{$product->product_name}}</h4>
+
+                            @endif
                                 <p class="mb-3">Category: Vegetables</p>
                                 <h5 class="fw-bold mb-3">3,35 $</h5>
                                 <div class="d-flex mb-4">

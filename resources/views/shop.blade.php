@@ -201,6 +201,9 @@
                             <div class="row g-4 justify-content-center">
                                 <div class="col-md-6 col-lg-6 col-xl-4">
                                     @foreach ($products as $product)
+                                    {{ dd($product) }}
+                                @endforeach
+                                    {{-- @foreach ($products as $product)
                                         <div class="rounded position-relative fruite-item"><a
                                                 href="{{ Route('shop-detail') }}">
                                                 <div class="fruite-img">
@@ -225,9 +228,9 @@
                                                 </div>
                                             </a>
                                         </div>
-                                    @endforeach
+                                    @endforeach --}}
                                 </div>
-                                {{-- <div class="col-md-6 col-lg-6 col-xl-4">
+                                {{-- <div class="col-md-6 col-lg-6 col-xl-4"> --}}
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
                                                 <img src="img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
@@ -354,7 +357,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                 <div class="col-12">
                                     <div class="pagination d-flex justify-content-center mt-5">
                                         <a href="#" class="rounded">&laquo;</a>
@@ -377,3 +380,6 @@
     <!-- Fruits Shop End-->
 
 @endsection
+
+
+

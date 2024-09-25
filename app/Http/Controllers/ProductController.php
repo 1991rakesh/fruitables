@@ -17,15 +17,14 @@ class ProductController extends Controller
 
     //  public function shop()
     //  {
-    //     $product = Product::with('images')->get();
-    //     // return $product;
-    //     return view('shop', ['products'=>$product]);
-    // }
+    //      $product = Product::with('images')->get();
+    //      return $product;
+    //      return view('shop', ['products'=>$product]);
+    //  }
 
     public function index()
     {
-        $limit = 4;
-        $product = Product::with('images')->limit($limit)->get();
+        $product = Product::with('images')->limit(4)->get();
         return view('index', ['products'=>$product]);
     }
 
