@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Comment;
 use App\Models\Image;
 use Illuminate\Support\Facades\Storage;
 use Auth;
@@ -15,12 +16,12 @@ class ProductController extends Controller
      */
 
 
-    //  public function shop()
-    //  {
-    //      $product = Product::with('images')->get();
-    //      return $product;
-    //      return view('shop', ['products'=>$product]);
-    //  }
+     public function shop()
+     {
+         $product = Product::with('images')->get();
+        //  return $product;
+         return view('shop', ['products'=>$product]);
+     }
 
     public function index()
     {
@@ -45,9 +46,6 @@ class ProductController extends Controller
         $request->validate([
             'product_name'=>'required|string|min:3',
             'mrp'=>'required|numeric',
-            'selling_pricep'=>'required|numeric',
-            'short_description'=>'required|text',
-            'long_description'=>'required|text',
         ]);
 
         $imgurl = [];
@@ -66,14 +64,12 @@ class ProductController extends Controller
             'tags'=>$request->tags,
             'category'=>$request->category
         ]);
-        // return $produt;
-       for($i=0;$i<count($imgurl); $i++){
+        for($i=0;$i<count($imgurl); $i++){
             Image::create([
                 'image_path'=>$imgurl[$i],
                 'product_id'=>$produt->id
             ]);
         }
-
         return redirect()->back()->with('success', "Product has been created!");
     }
 
@@ -86,9 +82,20 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function addComment(Request $request)
     {
-        //
+        return $request;
+        $request->validate([
+            'message'=>'required|string|min:3',
+            'rating'=>'required|numeric',
+        ]);
+
+        $comment = Comment::create([
+            'message'=>$request->message,
+            'rating'=>$request->rating,
+            'user_id'=>$request->user_id,
+            'product_id'=>$produt->id,
+        ]);
     }
 
     /**
