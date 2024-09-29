@@ -84,18 +84,20 @@ class ProductController extends Controller
      */
     public function addComment(Request $request)
     {
-        return $request;
         $request->validate([
-            'message'=>'required|string|min:3',
-            'rating'=>'required|numeric',
+            'message' => 'required|string|min:3',
+            'rating' => 'required|numeric',
+            'product_id' => 'required|numeric',
         ]);
 
         $comment = Comment::create([
-            'message'=>$request->message,
-            'rating'=>$request->rating,
-            'user_id'=>$request->user_id,
-            'product_id'=>$produt->id,
+            'message' => $request->message,
+            'rating' => $request->rating,
+            'user_id' => Auth::user()->id,
+            'product_id' => $request->product_id,
         ]);
+
+        return redirect()->back()->with('success', "Your Review has been submitted!");
     }
 
     /**

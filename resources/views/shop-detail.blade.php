@@ -23,7 +23,7 @@
                         <div class="col-lg-6">
                             <div class="border rounded">
                                 <a href="#">
-                                    <img src="{{ Storage::url($product->images[1]->image_path) }}" class="img-fluid rounded"
+                                    <img src="{{ Storage::url($product->images[1]->image_path) }}" style="width: 400px; height:400px;" class="img-fluid rounded"
                                         alt="Image">
                                 </a>
                             </div>
@@ -74,13 +74,7 @@
                             </nav>
                             <div class="tab-content mb-5">
                                 <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                                    <p>The generated Lorem Ipsum is therefore always free from repetition injected humour,
-                                        or non-characteristic words etc.
-                                        Susp endisse ultricies nisi vel quam suscipit </p>
-                                    <p>Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish
-                                        filefish Antarctic
-                                        icefish goldeye aholehole trumpetfish pilot fish airbreathing catfish, electric ray
-                                        sweeper.</p>
+                                    <p> {{ $product->long_description }} </p>
                                     <div class="px-2">
                                         <div class="row g-4">
                                             <div class="col-6">
@@ -201,8 +195,8 @@
                                 <div class="row g-4">
                                     <div class="col-lg-6">
                                         <div class="border-bottom rounded">
-                                            <input type="hidden" name="user_id" class="form-control"
-                                                value="{{ Auth::user()->id }}">
+                                            <input type="hidden" name="product_id" class="form-control"
+                                                value="{{ $product->id }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -233,7 +227,7 @@
                                                     <i class="fa fa-star"></i>
                                                 </div>
                                             </div>
-                                            <button class="btn text-white" style="background-color:  #81c408"> Add Products</button>
+                                            <button class="btn text-white" style="background-color:  #81c408"> Add Review</button>
 
                                             {{-- <a href="#"
                                                 class="btn border border-secondary text-primary rounded-pill px-4 py-3">

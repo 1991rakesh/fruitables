@@ -8,8 +8,8 @@ use App\Http\Controllers\ProductController;
 Route::get('/', [ProductController::class, 'index'])->name('index');
 Route::get('/shop', [ProductController::class, 'shop'])->name('shop');
 Route::get('/shop-detail', [ProductController::class, 'shopdetails'])->name('shop-detail');
-Route::get('/testimonial', function () {return view('testimonial');})->name('testimonial');
 Route::get('/contact', function () {return view('contact');})->name('contact');
+Route::get('/testimonial', function () {return view('testimonial');})->name('testimonial');
 Route::get('/chackout', function () {return view('chackout');})->name('chackout');
 Route::get('/cart', function () {return view('cart');})->name('cart');
 

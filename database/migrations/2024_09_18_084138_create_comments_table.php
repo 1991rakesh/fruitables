@@ -16,8 +16,8 @@ return new class extends Migration
             $table->text('message');
             $table->string('rating');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('product_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
