@@ -73,11 +73,15 @@ class ProductController extends Controller
         return redirect()->back()->with('success', "Product has been created!");
     }
 
-
     public function shopdetails(Request $request){
         $product = Product::with('images')->where('id', '=', $request->query('product_id'))->first();
-        return view('shop-detail', ['product'=>$product]);
+        $comments = Comment::where('product_id', '=', $request->query('product_id'))->get();
+        return view('shop-detail', ['product'=>$product, 'comments'=>$comments]);
     }
+    // public function shopdetails(Request $request){
+    //     $product = Product::with('images')->where('id', '=', $request->query('product_id'))->first();
+    //     return view('shop-detail', ['product'=>$product]);
+    // }
 
     /**
      * Display the specified resource.
@@ -98,6 +102,18 @@ class ProductController extends Controller
         ]);
 
         return redirect()->back()->with('success', "Your Review has been submitted!");
+    }
+
+
+    public function addToCart(Request $request){
+        $product_id = $request->query('product_id');
+        if(\session('product_idies')){
+            $lastProduct = session->get('product_idies');
+            session()->put('product_idies', [...$lastProduct, $product_id]);
+        }else{
+            session()->put('product_idies', [$product_id]);
+        }
+        return  redirect()->back()->with('success', "Product has been added to cart!");
     }
 
     /**

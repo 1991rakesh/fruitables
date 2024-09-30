@@ -13,6 +13,9 @@ Route::get('/testimonial', function () {return view('testimonial');})->name('tes
 Route::get('/chackout', function () {return view('chackout');})->name('chackout');
 Route::get('/cart', function () {return view('cart');})->name('cart');
 
+Route::get('/add_to_cart', [ProductController::class, 'addToCart'])->name('add_to_cart');
+
+
 Route::resource('/add_product', ProductController::class)->names([
     'index' => 'product.index',
     'create' => 'product.create',
@@ -23,8 +26,7 @@ Route::resource('/add_product', ProductController::class)->names([
 Route::post('/add_product', [ProductController::class, 'store'])->name('product.store');
 Route::any('/store-comment', [ProductController::class, 'addComment'])->name('comment.store');
 
-Route::get('/dashboard', function () {return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {return view('dashboard');})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

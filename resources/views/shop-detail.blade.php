@@ -22,10 +22,37 @@
                     <div class="row g-4">
                         <div class="col-lg-6">
                             <div class="border rounded">
-                                <a href="#">
+                                <div class="col-md-12 col-lg-5" style="width: 400px;">
+                                    <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
+                                        <div class="carousel-inner" role="listbox">
+                                            @foreach ($product->images as $index => $image)
+                                                <div class="carousel-item {{ $index === 0 ? 'active' : '' }} rounded">
+                                                    <img src="{{ Storage::url($image->image_path) }}"
+                                                        style="width: 400px; height:400px;"
+                                                        class="img-fluid bg-secondary rounded"
+                                                        alt="Slide {{ $index + 1 }}">
+                                                    <a href="#"
+                                                        class="btn px-4 py-2 text-white rounded">{{ $product->category }}</a>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselId"
+                                            data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselId"
+                                            data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {{-- <a href="#">
                                     <img src="{{ Storage::url($product->images[1]->image_path) }}" style="width: 400px; height:400px;" class="img-fluid rounded"
                                         alt="Image">
-                                </a>
+                                </a> --}}
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -35,13 +62,17 @@
                                 <strike>{{ $product->mrp_price }}</strike> &nbsp; &nbsp; &nbsp;
                                 &nbsp; &nbsp; {{ $product->selling_price }} / kg
                             </h5>
-                            <div class="d-flex mb-4">
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
+                            @foreach ($comments as $comment)
+                                <div class="d-flex mb-4">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= $comment->rating)
+                                            <i class="fa fa-star text-secondary"></i>
+                                        @else
+                                            <i class="fa fa-star"></i>
+                                        @endif
+                                    @endfor
+                                </div>
+                            @endforeach
                             <p class="mb-4">{{ $product->short_description }}</p>
                             <div class="input-group quantity mb-5" style="width: 100px;">
                                 <div class="input-group-btn">
@@ -104,7 +135,8 @@
                                                         <p class="mb-0">Organic</p>
                                                     </div>
                                                 </div>
-                                                <div class="row text-center align-items-center justify-content-center py-2">
+                                                <div
+                                                    class="row text-center align-items-center justify-content-center py-2">
                                                     <div class="col-6">
                                                         <p class="mb-0">Сheck</p>
                                                     </div>
@@ -125,47 +157,31 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
-                                    <div class="d-flex">
-                                        <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3"
-                                            style="width: 100px; height: 100px;" alt="">
-                                        <div class="">
-                                            <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                            <div class="d-flex justify-content-between">
-                                                <h5>Jason Smith</h5>
-                                                <div class="d-flex mb-3">
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star"></i>
+                                <div class="tab-pane" id="nav-mission" role="tabpanel"
+                                    aria-labelledby="nav-mission-tab">
+                                    @foreach ($comments as $comment)
+                                        <div class="d-flex">
+                                            <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3"
+                                                style="width: 100px; height: 100px;" alt="">
+                                            <div class="">
+                                                <p class="mb-2" style="font-size: 14px;">{{ $comment->created_at }}</p>
+                                                <div class="d-flex justify-content-between">
+                                                    <h5>{{ Auth::user()->name }}</h5>
+                                                    <div class="d-flex mb-3">
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($i <= $comment->rating)
+                                                                <i class="fa fa-star text-secondary"></i>
+                                                            @else
+                                                                <i class="fa fa-star"></i>
+                                                            @endif
+                                                        @endfor
+                                                    </div>
                                                 </div>
+                                                <p>{{ $comment->message }} </p>
                                             </div>
-                                            <p>The generated Lorem Ipsum is therefore always free from repetition injected
-                                                humour, or non-characteristic
-                                                words etc. Susp endisse ultricies nisi vel quam suscipit </p>
                                         </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3"
-                                            style="width: 100px; height: 100px;" alt="">
-                                        <div class="">
-                                            <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                            <div class="d-flex justify-content-between">
-                                                <h5>Sam Peters</h5>
-                                                <div class="d-flex mb-3">
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star text-secondary"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                            </div>
-                                            <p class="text-dark">The generated Lorem Ipsum is therefore always free from
-                                                repetition injected humour, or non-characteristic
-                                                words etc. Susp endisse ultricies nisi vel quam suscipit </p>
-                                        </div>
-                                    </div>
+                                    @endforeach
+
                                 </div>
                                 <div class="tab-pane" id="nav-vision" role="tabpanel">
                                     <p class="text-dark">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor
@@ -227,7 +243,8 @@
                                                     <i class="fa fa-star"></i>
                                                 </div>
                                             </div>
-                                            <button class="btn text-white" style="background-color:  #81c408"> Add Review</button>
+                                            <button class="btn text-white" style="background-color:  #81c408"> Add
+                                                Review</button>
 
                                             {{-- <a href="#"
                                                 class="btn border border-secondary text-primary rounded-pill px-4 py-3">
