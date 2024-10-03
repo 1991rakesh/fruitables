@@ -10,8 +10,10 @@ Route::get('/shop', [ProductController::class, 'shop'])->name('shop');
 Route::get('/shop-detail', [ProductController::class, 'shopdetails'])->name('shop-detail');
 Route::get('/contact', function () {return view('contact');})->name('contact');
 Route::get('/testimonial', function () {return view('testimonial');})->name('testimonial');
-Route::get('/chackout', function () {return view('chackout');})->name('chackout');
-Route::get('/cart', function () {return view('cart');})->name('cart');
+Route::get('/chackout', [ProductController::class, 'showchackoutPage'])->name('chackout');
+Route::get('/cart', [ProductController::class, 'showCartPage'])->name('cart');
+
+Route::get('/products-edit/{id}', [ProductController::class, 'edit'])->name('product-edit');
 
 Route::get('/add_to_cart', [ProductController::class, 'addToCart'])->name('add_to_cart');
 
@@ -19,7 +21,7 @@ Route::get('/add_to_cart', [ProductController::class, 'addToCart'])->name('add_t
 Route::resource('/add_product', ProductController::class)->names([
     'index' => 'product.index',
     'create' => 'product.create',
-    'edit' => 'product.edit',
+    // 'edit' => 'product.edit',
     'update' => 'product.update',
 ]);
 

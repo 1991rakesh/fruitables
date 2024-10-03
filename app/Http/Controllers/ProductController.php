@@ -11,15 +11,9 @@ use Auth;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-
-
      public function shop()
      {
          $product = Product::with('images')->get();
-        //  return $product;
          return view('shop', ['products'=>$product]);
      }
 
@@ -29,20 +23,13 @@ class ProductController extends Controller
         return view('index', ['products'=>$product]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('products.add_product');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        // return response()->json(['message'=>'hello world']);
         $request->validate([
             'product_name'=>'required|string|min:3',
             'mrp'=>'required|numeric',
@@ -78,14 +65,7 @@ class ProductController extends Controller
         $comments = Comment::where('product_id', '=', $request->query('product_id'))->get();
         return view('shop-detail', ['product'=>$product, 'comments'=>$comments]);
     }
-    // public function shopdetails(Request $request){
-    //     $product = Product::with('images')->where('id', '=', $request->query('product_id'))->first();
-    //     return view('shop-detail', ['product'=>$product]);
-    // }
 
-    /**
-     * Display the specified resource.
-     */
     public function addComment(Request $request)
     {
         $request->validate([
@@ -107,21 +87,58 @@ class ProductController extends Controller
 
     public function addToCart(Request $request){
         $product_id = $request->query('product_id');
-        if(\session('product_idies')){
-            $lastProduct = session->get('product_idies');
-            session()->put('product_idies', [...$lastProduct, $product_id]);
+        if(is_array(session()->get('product_idies'))){
+            $productIdies = session()->get('product_idies');
+            if(in_array($product_id, array_column($productIdies, 'product_id'))){
+                $key = array_search($product_id, array_column(session('product_idies'), 'product_id'));
+                $productIdies[$key]['count'] += 1;
+                session()->put('product_idies',  $productIdies);
+            }else{
+                $lastProduct = session()->get('product_idies');
+                session()->put('product_idies', [...$lastProduct, ['product_id'=>$product_id, 'count'=>1]]);
+            }
         }else{
-            session()->put('product_idies', [$product_id]);
+            session()->put('product_idies', [['product_id'=>$product_id, 'count'=>1]]);
         }
-        return  redirect()->back()->with('success', "Product has been added to cart!");
+        return redirect()->back()->with('success', "Product has been added to cart!");
     }
 
+
+    public function showCartPage()
+    {
+        $addedItems = session()->get('product_idies');
+        $product_idies = array_column($addedItems, 'product_id');
+        $products = Product::with('images')->whereIn('id', $product_idies)->get()->map(function($product)use($addedItems){
+            foreach ($addedItems as $key => $value) {
+                if($product->id == $value['product_id']){
+                    $product->count =  $value['count'];
+                }
+            }
+            return $product;
+        });
+        return view('cart', ['products'=>$products]);
+    }
+
+    public function showchackoutPage()
+    {
+        $addedItems = session()->get('product_idies');
+        $product_idies = array_column($addedItems, 'product_id');
+        $products = Product::with('images')->whereIn('id', $product_idies)->get()->map(function($product)use($addedItems){
+            foreach ($addedItems as $key => $value) {
+                if($product->id == $value['product_id']){
+                    $product->count =  $value['count'];
+                }
+            }
+            return $product;
+        });
+        return view('chackout', ['products'=>$products]);
+    }
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit()
     {
-        //
+        return view('products-edit');
     }
 
     /**

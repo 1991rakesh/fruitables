@@ -36,7 +36,7 @@
                             <form action="" class="">
                                 <input type="text" class="w-100 form-control border-0 py-3 mb-4" placeholder="Your Name">
                                 <input type="email" class="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Email">
-                                <textarea class="w-100 form-control border-0 mb-4" rows="5" style="height: 245px;" cols="10" placeholder="Your Message"></textarea>
+                                <textarea class="w-100 form-control border-0 mb-4" rows="5" cols="10" placeholder="Your Message"></textarea>
                                 <button class="w-100 btn form-control border-secondary py-3 bg-white text-primary " type="submit">Submit</button>
                             </form>
                         </div>
@@ -59,8 +59,7 @@
                                 <i class="fa fa-phone-alt fa-2x text-primary me-4"></i>
                                 <div>
                                     <h4> Contect Number </h4>
-                                    <p class="mb-2">+91 9460515039</p>
-                                    <p class="mb-2">+91 9460515039</p>
+
                                     <p class="mb-2">+91 9001249336</p>
                                 </div>
                             </div>

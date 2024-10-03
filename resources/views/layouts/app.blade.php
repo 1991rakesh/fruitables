@@ -16,6 +16,7 @@
         rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
@@ -61,7 +62,7 @@
         <div class="container px-0">
             <nav class="navbar navbar-light bg-white navbar-expand-xl">
                 <a href="index" class="navbar-brand">
-                    <a href="{{ Route('index') }}"><h1 class="text-primary display-6">VP Store</h1></a>
+                    <a href="{{ Route('index') }}"><h1 class="text-primary display-6">Fruitables</h1></a>
                 </a>
                 <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse">
@@ -83,7 +84,7 @@
                             <i class="fa fa-shopping-bag fa-2x"></i>
                             <span
                                 class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
-                                style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
+                                style="top: -5px; left: 15px; height: 20px; min-width: 20px;">{{!empty(session()->get('product_idies'))?count(session()->get('product_idies')):0}}</span>
                         </a>
                         @if (Auth::check())
                             <!-- Authenticated User Dropdown -->
@@ -92,12 +93,14 @@
                                     class="btn btn-success dropdown-toggle"
                                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-user"></i><br>{{ Auth::user()->name }}
+                                    <i class="fas fa-user"></i> &nbsp; {{ Auth::user()->name }}
                                 </button>
                                 <ul class="dropdown-menu">
+                                    @if (Auth::check() && Auth::user()->role == 'vendor')
                                     <li><a class="dropdown-item"
                                             href="{{ route('product.create') }}">{{ __('Add Products') }}</a></li>
                                     <li>
+                                    @endif
                                     <li><a class="dropdown-item"
                                             href="{{ route('profile.edit') }}">{{ __('Profile') }}</a></li>
                                     <li>

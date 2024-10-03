@@ -164,7 +164,7 @@
                                             <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3"
                                                 style="width: 100px; height: 100px;" alt="">
                                             <div class="">
-                                                <p class="mb-2" style="font-size: 14px;">{{ $comment->created_at }}</p>
+                                                <p class="mb-2" style="font-size: 14px;">{{ $comment->created_at->format('d-M-Y') }}</p>
                                                 <div class="d-flex justify-content-between">
                                                     <h5>{{ Auth::user()->name }}</h5>
                                                     <div class="d-flex mb-3">

@@ -17,7 +17,9 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user' => $request->user()->with(['products'=>function($q){
+                $q->with('images');
+            }])->first(),
         ]);
     }
 
@@ -57,4 +59,5 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
 }

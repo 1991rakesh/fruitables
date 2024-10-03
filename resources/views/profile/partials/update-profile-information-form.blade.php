@@ -1,5 +1,5 @@
 <section>
-    <div class="container" style="margin-top: 150px">
+    <div class="container">
         <div class="row">
             <header>
                 <h2 class="text-lg font-medium text-gray-900">
@@ -21,7 +21,7 @@
                     <div>
                         <label for="name"> Name </label>
                         <input id="name" name="name" type="text" class="form-control"
-                            :value="old('name', $user - > name)" required autofocus autocomplete="name" />
+                            value="{{ $user->name }}" required autofocus autocomplete="name" />
                         <x-input-error class="mt-2" :messages="$errors->get('name')" />
                     </div>
                     <br>
@@ -29,7 +29,7 @@
                     <div>
                         <label for="email">Email</label>
                         <input id="email" name="email" type="email" class="form-control"
-                            :value="old('email', $user - > email)" required autocomplete="username" />
+                            value="{{ $user->email }}" required autocomplete="username" />
                         <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
                         @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())

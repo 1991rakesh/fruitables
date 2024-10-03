@@ -1,5 +1,5 @@
 <section>
-    <div class="container" style="margin-top: 150px">
+    <div class="container">
     <header>
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Update Password') }}
