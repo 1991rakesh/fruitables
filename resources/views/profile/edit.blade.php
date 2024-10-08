@@ -1,5 +1,11 @@
 <x-app-layout>
     <div class="py-12 container" style="margin-top: 150px">
+        @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+    @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">

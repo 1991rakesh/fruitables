@@ -13,7 +13,8 @@ Route::get('/testimonial', function () {return view('testimonial');})->name('tes
 Route::get('/chackout', [ProductController::class, 'showchackoutPage'])->name('chackout');
 Route::get('/cart', [ProductController::class, 'showCartPage'])->name('cart');
 
-Route::get('/products-edit/{id}', [ProductController::class, 'edit'])->name('product-edit');
+Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('product-edit');
+Route::patch('/products/{id}', [ProductController::class, 'update'])->name('product-update');
 
 Route::get('/add_to_cart', [ProductController::class, 'addToCart'])->name('add_to_cart');
 
@@ -34,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/place-order', [ProductController::class, 'placedOrder'])->name('place.order');
+
 });
 
 require __DIR__.'/auth.php';

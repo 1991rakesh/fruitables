@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Comment;
 use App\Models\Image;
+use App\Models\Order;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 
@@ -136,24 +137,58 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit()
+    // ProductController.php
+
+    public function edit($id)
     {
-        return view('products-edit');
+        $product = Product::find($id);
+        return view('products-edit', compact('product'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    // ProductController.php
+
+    public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        // और फील्ड्स के लिए भी ऐसा ही करें
+        $product->save();
+        return redirect()->route('products-index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //
+    }
+
+    public function placedOrder(Request $request){
+        $request->validate([
+            'fullname'=>'required|string|min:3',
+            'address'=>'required|string',
+            'city'=>'required',
+            'district'=>'required|string',
+            'state'=>'required|string',
+            'postalcode'=>'required|string|max:6',
+            'mobile'=>'required|string|max:10',
+            'email'=>'required|string',
+        ]);
+        {
+            // Order::create($request->all());
+            Order::create([
+                'fullname'=>$request->fullname,
+                'address'=>$request->address,
+                'city'=>$request->city,
+                'district'=>$request->district,
+                'city'=>$request->city,
+                'state'=>$request->state,
+                'postalcode'=>$request->postalcode,
+                'mobile'=>$request->mobile,
+                'email'=>$request->email,
+                'user_id'=>$request->user()->id,
+                'products'=>json_encode(session()->get('product_idies'))
+            ]);
+            return redirect()->route('profile.edit')->with('success', 'Order Placed Successfully');
+            }
     }
 };
